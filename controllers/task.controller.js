@@ -8,7 +8,7 @@ const createTask = async (req, res) => {
     return res.status(400).json({ error: error.message });
   }
 
-  const existingTask = await Task.findOne({ name: req.body.name });
+  const existingTask = await Task.findOne({ title: req.body.title });
 
   if (existingTask) {
     return res.status(404).json({
@@ -17,7 +17,7 @@ const createTask = async (req, res) => {
     });
   }
 
-  const { title, description, status, dueDate, user_id } = req.body;
+  const { title, description, status, dueDate } = req.body;
 
   try {
     const task = new Task({
@@ -25,7 +25,6 @@ const createTask = async (req, res) => {
       description,
       status,
       dueDate,
-      user_id,
     });
 
     await task.save();
@@ -94,7 +93,12 @@ const getSingleTask = async (req, res) => {
 
 // update task
 const updateTask = async (req, res) => {
-  const existingTask = await Task.findOne({ name: req.body.name });
+  const { error } = taskValidator.validate(req.body);
+  if (error) {
+    return res.status(400).json({ error: error.message });
+  }
+
+  const existingTask = await Task.findOne({ title: req.body.title });
 
   if (existingTask) {
     return res.status(200).json({

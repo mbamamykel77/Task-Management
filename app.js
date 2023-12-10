@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
-import { router as taskRoute } from "./src/routes/routes.js";
-import "./src/config/connect.js";
+import { router as taskRoute } from "./routes/routes.js";
+import "./config/connect.js";
 
 const app = express();
 const port = Number(process.env.PORT) || 3000;

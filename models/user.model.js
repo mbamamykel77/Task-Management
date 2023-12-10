@@ -23,12 +23,7 @@ const userSchema = new Schema(
       type: String,
       required: [false, "please provide a password"],
       minlength: 6,
-    },
-    confirmPassword: {
-      type: String,
-      required: [false, "Confirmation of the user's password"],
-      minlength: 6,
-    },
+    }
   },
   {
     timestamps: true,

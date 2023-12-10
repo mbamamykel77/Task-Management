@@ -26,7 +26,7 @@ export default class userController {
         const hashedPassword = bcrypt.hashSync(req.body.password, saltRound);
   
         const user = {
-          userName: req.body.firstName,
+          fullName: req.body.fullName,
           email: req.body.email,
           password: hashedPassword,
           confirmedPassword: hashedPassword,
